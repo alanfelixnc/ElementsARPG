@@ -202,7 +202,9 @@ start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=22]
 
-[node name="RobsonAnimation" type="Node2D"]
+[node name="RobsonAnimation" type="Node2D" groups=[
+"PlayerAnimation",
+]]
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -9 )

@@ -23,9 +23,7 @@ var animation_state = null
 
 # This function loads the active playable character animation
 func load_character_animation(character):
-	var instanced_scenes = get_children()
-	for i in instanced_scenes.size():
-		instanced_scenes[i].queue_free()
+	get_tree().call_group("PlayerAnimation", "queue_free")
 
 	var player_scene = player_scenes[character].instance()
 	add_child(player_scene)
@@ -54,12 +52,12 @@ func move_player(delta):
 
 # On ready
 func _ready():
-	active_character = get_parent().active_character
+	active_character = get_parent().get_parent().active_character
 	load_character_animation(active_character)
 
 # On every step
 func _process(delta):
-	var new_character = get_parent().active_character
+	var new_character = get_parent().get_parent().active_character
 	if active_character != new_character:
 		active_character = new_character
 		load_character_animation(active_character)
