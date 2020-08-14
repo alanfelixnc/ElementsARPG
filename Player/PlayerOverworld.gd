@@ -52,12 +52,12 @@ func move_player(delta):
 
 # On ready
 func _ready():
-	active_character = get_parent().get_parent().active_character
+	active_character = get_tree().get_root().get_node("Game").active_character
 	load_character_animation(active_character)
 
 # On every step
 func _process(delta):
-	var new_character = get_parent().get_parent().active_character
+	var new_character = get_tree().get_root().get_node("Game").active_character
 	if active_character != new_character:
 		active_character = new_character
 		load_character_animation(active_character)
