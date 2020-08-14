@@ -49,6 +49,16 @@ var party = {
 	}
 }
 
+## Player's inventory ##
+var inventory = {
+	"skills": [
+		[1, 23] # 1 = skill index, 23 = skill amount
+	],
+	"consumables": [
+		[1, 23]
+	]
+}
+
 # On every step
 func _process(delta):
 	if Input.is_action_just_pressed("test_select_char_1"):
