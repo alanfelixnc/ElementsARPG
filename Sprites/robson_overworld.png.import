@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PlayerBaseMale.png-302f62eb3f5d1179c1cd2465492390e6.stex"
+path="res://.import/robson_overworld.png-37d47565153b67c0f5fc06d615bc2f55.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/PlayerBaseMale.png"
-dest_files=[ "res://.import/PlayerBaseMale.png-302f62eb3f5d1179c1cd2465492390e6.stex" ]
+source_file="res://Sprites/robson_overworld.png"
+dest_files=[ "res://.import/robson_overworld.png-37d47565153b67c0f5fc06d615bc2f55.stex" ]
 
 [params]
 
