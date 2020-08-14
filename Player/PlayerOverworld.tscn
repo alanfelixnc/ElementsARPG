@@ -6,6 +6,8 @@
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 current = true
+smoothing_enabled = true
+smoothing_speed = 10.0
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
 script = ExtResource( 1 )
