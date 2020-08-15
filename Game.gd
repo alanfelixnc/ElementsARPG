@@ -11,62 +11,71 @@ var overworld_hud_scene = preload("res://Menus/OverworldHUDMenu.tscn")
 
 ## Player stats ##
 # Player's current level
-export var player_level = 1
+export var player_level = 0
 # Player's current XP
 export var player_xp = 0
 # Player's max XP
-export var player_max_xp = 100
+export var player_max_xp = 0
 
 ## Game base stats ##
 # Health
-export var base_hp = 50
+export var base_hp = 0
 # Physical Damage
-export var base_dmg = 10
+export var base_dmg = 0
 # Elemental Damage
-export var base_edmg = 5
+export var base_edmg = 0
 # Physical Defense
-export var base_def = 10
+export var base_def = 0
 # Elemental Resistance
-export var base_res = 5
+export var base_res = 0
 # Attack Speed
-export var base_aspd = 5
+export var base_aspd = 0
 
 ## Player's party ##
 # Selected character from party
-export var active_character = "Robson"
+export var active_character = ""
 # Party characters status and equips
-var party = {
-	"Robson": {
-		"unlocked": true,
-		"special_ability": 0,
-		"consumable_a": 0,
-		"consumable_b": 0,
-		"skill_a": 0,
-		"skill_b": 0,
-		"skill_c": 0,
-		"passive_skill": 0
-	},
-	"Marina": {
-		"unlocked": false,
-		"special_ability": 0,
-		"consumable_a": 0,
-		"consumable_b": 0,
-		"skill_a": 0,
-		"skill_b": 0,
-		"skill_c": 0,
-		"passive_skill": 0
-	}
-}
+var party = {}
 
 ## Player's inventory ##
-var inventory = {
-	"skills": [
-		[1, 23] # 1 = skill index, 23 = skill amount
-	],
-	"consumables": [
-		[1, 23]
-	]
-}
+var inventory = {}
+
+# Sets a new game data
+func reset_game_data():
+	player_level = 1
+	player_xp = 0
+	player_max_xp = 100
+	active_character = "Robson"
+	party = {
+		"Robson": {
+			"unlocked": true,
+			"special_ability": 0,
+			"consumable_a": 0,
+			"consumable_b": 0,
+			"skill_a": 0,
+			"skill_b": 0,
+			"skill_c": 0,
+			"passive_skill": 0
+		},
+		"Marina": {
+			"unlocked": false,
+			"special_ability": 0,
+			"consumable_a": 0,
+			"consumable_b": 0,
+			"skill_a": 0,
+			"skill_b": 0,
+			"skill_c": 0,
+			"passive_skill": 0
+		}
+	}
+	inventory = {
+		"skills": [
+			[1, 23] # 1 = skill index, 23 = skill amount
+		],
+		"consumables": [
+			[1, 23]
+		]
+	}
 
 # Stores game data
 func save_game_data():
@@ -117,6 +126,7 @@ func continue_previous_game():
 
 # On ready
 func _ready():
+	reset_game_data()
 	var main_menu = main_menu_scene.instance()
 	add_child(main_menu)
 	main_menu.connect("start_new_game", self, "start_new_game")
@@ -130,6 +140,7 @@ func _ready():
 
 # On start of a new game
 func start_new_game():
+	reset_game_data()
 	save_game()
 	load_overworld_map()
 	var main_menu = $MainMenu
