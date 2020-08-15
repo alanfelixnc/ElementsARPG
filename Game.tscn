@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 2 )
@@ -9,7 +8,3 @@ player_level = 4
 player_xp = 3
 base_dmg = 13
 active_character = "Marina"
-
-[node name="icon" type="Sprite" parent="."]
-position = Vector2( 178.023, 124.365 )
-texture = ExtResource( 3 )

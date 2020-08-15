@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Maps/LuminaVillage.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
 
 [node name="LuminaVillage" type="Node"]
 script = ExtResource( 1 )
@@ -11,3 +12,7 @@ script = ExtResource( 1 )
 position = Vector2( 169.5, 129 )
 
 [node name="YSort" type="YSort" parent="."]
+
+[node name="icon" type="Sprite" parent="YSort"]
+position = Vector2( 109.184, 81.9486 )
+texture = ExtResource( 2 )
