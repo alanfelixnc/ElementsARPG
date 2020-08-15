@@ -8,12 +8,23 @@ script = ExtResource( 1 )
 [node name="MenuCanvas" type="CanvasLayer" parent="."]
 
 [node name="NewGame" type="Button" parent="MenuCanvas"]
-margin_left = 93.8995
-margin_top = 65.5459
-margin_right = 229.899
-margin_bottom = 85.5459
+margin_left = 100.0
+margin_top = 64.0
+margin_right = 236.0
+margin_bottom = 84.0
 text = "Novo Jogo"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ContinueGame" type="Button" parent="MenuCanvas"]
+margin_left = 100.0
+margin_top = 90.0
+margin_right = 236.0
+margin_bottom = 110.0
+text = "Continuar"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="MenuCanvas/NewGame" to="." method="_on_NewGame_pressed"]
+[connection signal="pressed" from="MenuCanvas/ContinueGame" to="." method="_on_LoadGame_pressed"]

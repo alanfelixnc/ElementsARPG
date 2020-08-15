@@ -81,7 +81,7 @@ func save_game_data():
 	}
 	return save_dict
 
-# On save
+# On game save
 func save_game():
 	var save_game = File.new()
 	save_game.open("user://savegame.save", File.WRITE)
@@ -90,16 +90,53 @@ func save_game():
 	save_game.close()
 	print("Game saved!")
 
+# On loading game save
+func load_game_data():
+	print("Loading game data...")
+	var save_game = File.new()
+	save_game.open("user://savegame.save", File.READ)
+	var node_data = parse_json(save_game.get_as_text())
+	
+	# Set the save game data to actual game data
+	player_level = node_data.player_level
+	player_xp = node_data.player_xp
+	player_max_xp = node_data.player_max_xp
+	active_character = node_data.active_character
+	party = node_data.party
+	inventory = node_data.inventory
+	
+	save_game.close()
+	print("Game loaded!")
+
+# On continue previous game
+func continue_previous_game():
+	load_game_data()
+	load_overworld_map()
+	var main_menu = $MainMenu
+	main_menu.queue_free()
+
 # On ready
 func _ready():
 	var main_menu = main_menu_scene.instance()
 	add_child(main_menu)
 	main_menu.connect("start_new_game", self, "start_new_game")
+	var continue_button = main_menu.get_node("MenuCanvas/ContinueGame")
+	var save_game = File.new()
+	if not save_game.file_exists("user://savegame.save"):
+		continue_button.disabled = true
+	else:
+		continue_button.disabled = false
+		main_menu.connect("continue_previous_game", self, "continue_previous_game")
 
 # On start of a new game
 func start_new_game():
+	save_game()
+	load_overworld_map()
 	var main_menu = $MainMenu
 	main_menu.queue_free()
+
+# Instances the overworld map and hud of the game
+func load_overworld_map():
 	var lumina_village = lumina_village_scene.instance()
 	add_child(lumina_village)
 	var overworld_hud = overworld_hud_scene.instance()
