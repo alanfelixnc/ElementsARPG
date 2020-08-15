@@ -6,6 +6,9 @@ var main_menu_scene = preload("res://Menus/MainMenu.tscn")
 # Lumina Village scene
 var lumina_village_scene = preload("res://Maps/LuminaVillage.tscn")
 
+# Overworld HUD scene
+var overworld_hud_scene = preload("res://Menus/OverworldHUDMenu.tscn")
+
 ## Player stats ##
 # Player's current level
 export var player_level = 1
@@ -65,6 +68,28 @@ var inventory = {
 	]
 }
 
+# Stores game data
+func save_game_data():
+	print("Generating save data...")
+	var save_dict = {
+		"player_level": player_level,
+		"player_xp": player_xp,
+		"player_max_xp": player_max_xp,
+		"active_character": active_character,
+		"party": party,
+		"inventory": inventory		
+	}
+	return save_dict
+
+# On save
+func save_game():
+	var save_game = File.new()
+	save_game.open("user://savegame.save", File.WRITE)
+	var save_data = save_game_data()
+	save_game.store_line(to_json(save_data))
+	save_game.close()
+	print("Game saved!")
+
 # On ready
 func _ready():
 	var main_menu = main_menu_scene.instance()
@@ -77,6 +102,9 @@ func start_new_game():
 	main_menu.queue_free()
 	var lumina_village = lumina_village_scene.instance()
 	add_child(lumina_village)
+	var overworld_hud = overworld_hud_scene.instance()
+	add_child(overworld_hud)
+	overworld_hud.connect("save_game", self, "save_game")
 
 # On every step
 func _process(delta):

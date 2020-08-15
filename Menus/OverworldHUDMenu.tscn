@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Menus/OverworldHUDMenu.gd" type="Script" id=1]
+
+[node name="HUDMenu" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="SaveGame" type="Button" parent="."]
+margin_right = 49.0
+margin_bottom = 20.0
+text = "Salvar"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="SaveGame" to="." method="_on_SaveGame_pressed"]
