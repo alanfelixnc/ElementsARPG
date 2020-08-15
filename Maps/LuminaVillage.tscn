@@ -2,9 +2,12 @@
 
 [ext_resource path="res://Maps/LuminaVillage.gd" type="Script" id=1]
 
-[node name="Node2D" type="Node"]
+[node name="LuminaVillage" type="Node"]
 script = ExtResource( 1 )
 
 [node name="Background" type="Sprite" parent="."]
+
+[node name="PlayerSpawn" type="Position2D" parent="."]
+position = Vector2( 169.5, 129 )
 
 [node name="YSort" type="YSort" parent="."]

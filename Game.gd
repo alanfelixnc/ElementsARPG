@@ -1,5 +1,11 @@
 extends Node2D
 
+# Main menu scene
+var main_menu_scene = preload("res://Menus/MainMenu.tscn")
+
+# Lumina Village scene
+var lumina_village_scene = preload("res://Maps/LuminaVillage.tscn")
+
 ## Player stats ##
 # Player's current level
 export var player_level = 1
@@ -58,6 +64,19 @@ var inventory = {
 		[1, 23]
 	]
 }
+
+# On ready
+func _ready():
+	var main_menu = main_menu_scene.instance()
+	add_child(main_menu)
+	main_menu.connect("start_new_game", self, "start_new_game")
+
+# On start of a new game
+func start_new_game():
+	var main_menu = $MainMenu
+	main_menu.queue_free()
+	var lumina_village = lumina_village_scene.instance()
+	add_child(lumina_village)
 
 # On every step
 func _process(delta):
