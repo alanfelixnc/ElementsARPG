@@ -76,6 +76,17 @@ func reset_game_data():
 		]
 	}
 
+# Goes back to the main menu
+func load_main_menu():
+	var overworld_map = $OverworldMap
+	overworld_map.queue_free()
+	var overworld_hud = $HUDMenu
+	overworld_hud.queue_free()
+	var main_menu = main_menu_scene.instance()
+	add_child(main_menu)
+	main_menu.connect("start_new_game", self, "start_new_game")
+	main_menu.connect("continue_previous_game", self, "continue_previous_game")
+
 # Instances the overworld map and hud of the game
 func load_overworld_map():
 	var lumina_village = lumina_village_scene.instance()
@@ -83,6 +94,7 @@ func load_overworld_map():
 	var overworld_hud = overworld_hud_scene.instance()
 	add_child(overworld_hud)
 	overworld_hud.connect("save_game", self, "save_game")
+	overworld_hud.connect("back_to_menu", self, "load_main_menu")
 
 # Stores the game data
 func save_game_data():
@@ -142,16 +154,13 @@ func continue_previous_game():
 # On ready
 func _ready():
 	reset_game_data()
-	var main_menu = main_menu_scene.instance()
-	add_child(main_menu)
-	main_menu.connect("start_new_game", self, "start_new_game")
-	var continue_button = main_menu.get_node("MenuCanvas/ContinueGame")
+	var continue_button = $MainMenu/MenuCanvas/ContinueGame
+	
 	var save_game = File.new()
 	if not save_game.file_exists("user://savegame.save"):
 		continue_button.disabled = true
 	else:
 		continue_button.disabled = false
-		main_menu.connect("continue_previous_game", self, "continue_previous_game")
 
 # On every step
 func _process(delta):

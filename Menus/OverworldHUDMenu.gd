@@ -9,16 +9,22 @@ onready var HUDButton = $SaveGame
 # Signals when saving the game
 signal save_game
 
+# Signals when going back to main menu
+signal back_to_menu
+
 # On button SaveGame pressed
 func _on_SaveGame_pressed():
 	emit_signal("save_game")
 
 # Show and hide HUD menu
 func show_hud_menu(show):
+	var hud_items = get_tree().get_nodes_in_group("HUDItems")
 	if show:
-		HUDButton.show()
+		for i in hud_items:
+			i.show()
 	else:
-		HUDButton.hide()
+		for i in hud_items:
+			i.hide()
 
 # On ready
 func _ready():
@@ -35,3 +41,8 @@ func _physics_process(delta):
 			get_tree().paused = false
 		game_paused = get_tree().paused
 		show_hud_menu(game_paused)
+
+
+func _on_BackToMenu_pressed():
+	get_tree().paused = false
+	emit_signal("back_to_menu")

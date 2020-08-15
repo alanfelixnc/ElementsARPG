@@ -1,10 +1,17 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=2]
+[ext_resource path="res://Menus/MainMenu.tscn" type="PackedScene" id=4]
 
 [node name="Game" type="Node2D"]
+pause_mode = 2
 script = ExtResource( 2 )
 player_level = 4
 player_xp = 3
 base_dmg = 13
 active_character = "Marina"
+
+[node name="MainMenu" parent="." instance=ExtResource( 4 )]
+pause_mode = 2
+[connection signal="continue_previous_game" from="MainMenu" to="." method="continue_previous_game"]
+[connection signal="start_new_game" from="MainMenu" to="." method="start_new_game"]
