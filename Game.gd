@@ -1,13 +1,12 @@
 extends Node2D
 
+## Preloaded scenes ##
 # Main menu scene
 var main_menu_scene = preload("res://Menus/MainMenu.tscn")
-
-# Lumina Village scene
-var lumina_village_scene = preload("res://Maps/LuminaVillage.tscn")
-
 # Overworld HUD scene
 var overworld_hud_scene = preload("res://Menus/OverworldHUDMenu.tscn")
+# Lumina Village scene
+var lumina_village_scene = preload("res://Maps/LuminaVillage.tscn")
 
 ## Player stats ##
 # Player's current level
@@ -40,7 +39,7 @@ var party = {}
 ## Player's inventory ##
 var inventory = {}
 
-# Sets a new game data
+# Resets the game data
 func reset_game_data():
 	player_level = 1
 	player_xp = 0
@@ -77,7 +76,15 @@ func reset_game_data():
 		]
 	}
 
-# Stores game data
+# Instances the overworld map and hud of the game
+func load_overworld_map():
+	var lumina_village = lumina_village_scene.instance()
+	add_child(lumina_village)
+	var overworld_hud = overworld_hud_scene.instance()
+	add_child(overworld_hud)
+	overworld_hud.connect("save_game", self, "save_game")
+
+# Stores the game data
 func save_game_data():
 	print("Generating save data...")
 	var save_dict = {
@@ -117,6 +124,14 @@ func load_game_data():
 	save_game.close()
 	print("Game loaded!")
 
+# On starting a new game
+func start_new_game():
+	reset_game_data()
+	save_game()
+	load_overworld_map()
+	var main_menu = $MainMenu
+	main_menu.queue_free()
+
 # On continue previous game
 func continue_previous_game():
 	load_game_data()
@@ -137,22 +152,6 @@ func _ready():
 	else:
 		continue_button.disabled = false
 		main_menu.connect("continue_previous_game", self, "continue_previous_game")
-
-# On start of a new game
-func start_new_game():
-	reset_game_data()
-	save_game()
-	load_overworld_map()
-	var main_menu = $MainMenu
-	main_menu.queue_free()
-
-# Instances the overworld map and hud of the game
-func load_overworld_map():
-	var lumina_village = lumina_village_scene.instance()
-	add_child(lumina_village)
-	var overworld_hud = overworld_hud_scene.instance()
-	add_child(overworld_hud)
-	overworld_hud.connect("save_game", self, "save_game")
 
 # On every step
 func _process(delta):
