@@ -1,4 +1,6 @@
 # Elements - Action RPG Game
+![Robson_Marina_Gif](Images/robson_marina.gif)
+
 
 O jogo Elements é um game de action rpg que está sendo desenvolvido na Godot Engine, é o primeiro projeto de jogos feito por AlphaDX e Tofim.
 
